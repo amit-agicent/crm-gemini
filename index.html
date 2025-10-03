@@ -4,68 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minimalist CRM</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="light-mode">
-    <button id="theme-toggle">🌙 Toggle Dark Mode</button>
+    <div class="theme-controls">
+        <button id="theme-toggle">🌙 Toggle Dark Mode</button>
+    </div>
     
     <div id="auth-view" class="container active">
-        <h2>Login / Sign Up</h2>
+        <h2>🚀 Welcome to Your CRM</h2>
         <form id="auth-form">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit" id="login-btn">Log In</button>
-            <button type="button" id="signup-btn">Sign Up</button>
-            <p id="auth-message" class="error"></p>
+            <input type="text" id="username" placeholder="Username" required autocomplete="username">
+            <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+            <div class="form-actions">
+                <button type="submit" id="login-btn">Log In</button>
+                <button type="button" id="signup-btn">Sign Up</button>
+            </div>
+            <p id="auth-message" class="message"></p>
         </form>
     </div>
 
     <div id="app-view" class="container hidden">
         <header>
-            <h1 id="welcome-msg">Welcome, User!</h1>
+            <h1 id="welcome-msg">Welcome!</h1>
             <nav>
                 <button class="nav-btn" data-target="dashboard">Dashboard</button>
                 <button class="nav-btn" data-target="entry">Entry</button>
                 <button class="nav-btn" data-target="dar">DAR</button>
                 <button class="nav-btn" data-target="history">History</button>
-                <button class="nav-btn" id="logout-btn">Logout</button>
+                <button class="nav-btn logout-btn" id="logout-btn">Logout</button>
             </nav>
         </header>
-
-        <section id="dashboard-view" class="content-panel active">
-            <h2>Dashboard</h2>
-            <div id="stats-container">
-                <div class="stat-card"><h3>Connections Sent</h3><p id="total-sent">0</p></div>
-                </div>
-        </section>
-
-        <section id="entry-view" class="content-panel hidden">
-            <h2>New Entry (CRM Data)</h2>
-            <form id="crm-entry-form">
-                <p>... Form inputs here ...</p>
-                <button type="submit">Save CRM Entry</button>
-            </form>
-        </section>
-
-        <section id="dar-view" class="content-panel hidden">
-            <h2>Daily Activity Report (DAR)</h2>
-            <form id="dar-entry-form">
-                <div id="dar-entries">
+        
+        <main>
+            <section id="dashboard-view" class="content-panel active">
+                <h2>📈 Performance Overview</h2>
+                <div id="stats-container" class="grid-stats">
+                    <div class="stat-card">
+                        <h3>Connections Sent (Total)</h3>
+                        <p id="total-sent">0</p>
                     </div>
-                <button type="button" id="add-dar-entry">+ Add Another Activity</button>
-                <button type="submit">Save DAR</button>
-            </form>
-        </section>
+                    <div class="stat-card">
+                        <h3>Connections Accepted</h3>
+                        <p id="total-accepted">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Overall Conversion Rate</h3>
+                        <p id="overall-conversion">0%</p>
+                    </div>
+                    <div class="stat-card full-width">
+                        <h3>Performance by Country/Time</h3>
+                        <div id="country-performance-chart">[Infographic Placeholder]</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="entry-view" class="content-panel hidden">
+                <h2>📝 New CRM Entry</h2>
+                <form id="crm-entry-form">
+                    
+                    <fieldset>
+                        <legend>Connection Statistics & Timing</legend>
+                        <label>Connections Sent:
+                            <input type="number" name="connections_sent" value="0" min="0" required>
+                        </label>
+                        <label>Connections Accepted:
+                            <input type="number" name="connections_accepted" value="0" min="0" required>
+                        </label>
+                        <label>Date (IST):
+                            <input type="date" name="date_ist" required>
+                        </label>
+                        <label>Time (IST 12h):
+                            <input type="time" name="time_ist" placeholder="HH:MM AM/PM" required>
+                        </label>
+                        <label>Country Targeted:
+                            <select name="country_targeted" required>
+                                <option value="">Select Country</option>
+                                <option value="USA">USA</option>
+                                <option value="UK">UK</option>
+                                <option value="EUROPE_OTHER">EUROPEAN COUNTRIES OTHER THAN UK</option>
+                                <option value="AUSTRALIA">AUSTRALIA</option>
+                                <option value="UAE">UAE</option>
+                                <option value="CANADA">CANADA</option>
+                            </select>
+                        </label>
+                        <label>State (USA/Canada only):
+                            <input type="text" name="state" placeholder="e.g., California">
+                        </label>
+                        <p class="auto-calculated-note">
+                            *Target Country/State Time will be calculated automatically by the script.
+                        </p>
+                    </fieldset>
 
-        <section id="history-view" class="content-panel hidden">
-            <h2>History</h2>
-            <div class="history-controls">
-                <button data-history-type="crm">Show CRM Entries</button>
-                <button data-history-type="dar">Show DAR Entries</button>
-            </div>
-            <table id="history-table">
-                </table>
-        </section>
+                    <fieldset>
+                        <legend>Prospect Details (Connection Accepted)</legend>
+                        <p class="hint">Fill this section for each accepted connection. You will need to submit this form for each prospect.</p>
+                        
+                        <label>Name:
+                            <input type="text" name="prospect_name" required>
+                        </label>
+                        <label>Date of Connection Acceptance:
+                            <input type="date" name="connection_date" required>
+                        </label>
+                        <label>Designation:
+                            <input type="text" name="designation" required>
+                        </label>
+                        <label>LinkedIn URL:
+                            <input type="url" name="linkedin_url" placeholder="https://linkedin.com/in/..." required>
+                        </label>
+                        <label>Industry:
+                            <input type="text" name="industry" required>
+                        </label>
+                        <label>Company Size:
+                            <select name="company_size" required>
+                                <option value="1-10">1-10</option>
+                                <option value="11-50">11-50</option>
+                                <option value="51-200">51-200</option>
+                                <option value="201-500">201-500</option>
+                                <option value="501-1000">501-1000</option>
+                                <option value="1000+">1000+</option>
+                            </select>
+                        </label>
+                        
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="recently_posted"> Recently Posted
+                            </label>
+                            <label>
+                                <input type="checkbox" name="hiring_tech"> Hiring for Tech
+                            </label>
+                        </div>
+
+                        <label>Relevance (1-5):
+                            <input type="number" name="relevance" min="1" max="5" required>
+                        </label>
+                        <label>Activity Rate (1-5):
+                            <input type="number" name="activity_rate" min="1" max="5" required>
+                        </label>
+                        <p class="auto-calculated-note">
+                            *Follow-up Date (+4 days) will be calculated automatically by the script.
+                        </p>
+                    </fieldset>
+                    
+                    <button type="submit">Save CRM Entry</button>
+                </form>
+            </section>
+
+            <section id="dar-view" class="content-panel hidden">
+                <h2>🗓️ Daily Activity Report (DAR)</h2>
+                <form id="dar-entry-form">
+                    <div id="dar-entries">
+                        </div>
+                    <button type="button" id="add-dar-entry">+ Add Another Activity</button>
+                    <button type="submit">Save DAR</button>
+                </form>
+            </section>
+
+            <section id="history-view" class="content-panel hidden">
+                <h2>📚 Entry History</h2>
+                <div class="history-controls">
+                    <button data-history-type="crm">Show CRM Entries</button>
+                    <button data-history-type="dar">Show DAR Entries</button>
+                </div>
+                <div class="table-wrapper">
+                    <table id="history-table">
+                        <thead>
+                            <tr><th>Select a history type above to view data.</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
     </div>
 
     <script src="app.js"></script>
