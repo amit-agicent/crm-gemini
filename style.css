@@ -1,0 +1,71 @@
+:root {
+    /* Light Mode Variables (Default) */
+    --bg-color: #f0f4f8;
+    --text-color: #1e293b;
+    --card-bg: #ffffff;
+    --primary-color: #3b82f6; /* Blue */
+    --hover-color: #2563eb;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+    /* Dark Mode Variables */
+    --bg-color: #1a202c;
+    --text-color: #f7f7f7;
+    --card-bg: #2d3748;
+    --primary-color: #63b3ed; /* Lighter Blue */
+    --hover-color: #4299e1;
+    --border-color: #4a5568;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif; /* Modern font */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Subtle Transition */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Minimalist Button and Input Styling */
+button, input[type="submit"], .nav-btn {
+    background-color: var(--primary-color);
+    color: var(--card-bg); /* White/Light text on primary background */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s;
+}
+
+button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-1px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Subtle Animation Example */
+.content-panel {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.content-panel.active {
+    opacity: 1;
+    transform: translateY(0);
+}
