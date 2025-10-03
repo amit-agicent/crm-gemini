@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist CRM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+    <button id="theme-toggle">🌙 Toggle Dark Mode</button>
+    
+    <div id="auth-view" class="container active">
+        <h2>Login / Sign Up</h2>
+        <form id="auth-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" id="login-btn">Log In</button>
+            <button type="button" id="signup-btn">Sign Up</button>
+            <p id="auth-message" class="error"></p>
+        </form>
+    </div>
+
+    <div id="app-view" class="container hidden">
+        <header>
+            <h1 id="welcome-msg">Welcome, User!</h1>
+            <nav>
+                <button class="nav-btn" data-target="dashboard">Dashboard</button>
+                <button class="nav-btn" data-target="entry">Entry</button>
+                <button class="nav-btn" data-target="dar">DAR</button>
+                <button class="nav-btn" data-target="history">History</button>
+                <button class="nav-btn" id="logout-btn">Logout</button>
+            </nav>
+        </header>
+
+        <section id="dashboard-view" class="content-panel active">
+            <h2>Dashboard</h2>
+            <div id="stats-container">
+                <div class="stat-card"><h3>Connections Sent</h3><p id="total-sent">0</p></div>
+                </div>
+        </section>
+
+        <section id="entry-view" class="content-panel hidden">
+            <h2>New Entry (CRM Data)</h2>
+            <form id="crm-entry-form">
+                <p>... Form inputs here ...</p>
+                <button type="submit">Save CRM Entry</button>
+            </form>
+        </section>
+
+        <section id="dar-view" class="content-panel hidden">
+            <h2>Daily Activity Report (DAR)</h2>
+            <form id="dar-entry-form">
+                <div id="dar-entries">
+                    </div>
+                <button type="button" id="add-dar-entry">+ Add Another Activity</button>
+                <button type="submit">Save DAR</button>
+            </form>
+        </section>
+
+        <section id="history-view" class="content-panel hidden">
+            <h2>History</h2>
+            <div class="history-controls">
+                <button data-history-type="crm">Show CRM Entries</button>
+                <button data-history-type="dar">Show DAR Entries</button>
+            </div>
+            <table id="history-table">
+                </table>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
